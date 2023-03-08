@@ -223,6 +223,8 @@ class _MultiSelectBottomSheetState<T> extends State<MultiSelectBottomSheet<T>> {
 
   @override
   Widget build(BuildContext context) {
+    Size size=MediaQuery.of(context).size;
+    double width = size.width;
     return Container(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -328,6 +330,11 @@ class _MultiSelectBottomSheetState<T> extends State<MultiSelectBottomSheet<T>> {
                   children: [
                     Expanded(
                       child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          padding: const EdgeInsets.all(4.0),
+                          textStyle: const TextStyle(fontSize: 16),
+                        ),
                         onPressed: () {
                           widget.onCancelTap(context, widget.initialValue);
                         },
@@ -335,11 +342,7 @@ class _MultiSelectBottomSheetState<T> extends State<MultiSelectBottomSheet<T>> {
                             Text(
                               "CANCEL",
                               style: TextStyle(
-                                color: (widget.selectedColor != null &&
-                                        widget.selectedColor !=
-                                            Colors.transparent)
-                                    ? widget.selectedColor!.withOpacity(1)
-                                    : Theme.of(context).primaryColor,
+                                color:Colors.white
                               ),
                             ),
                       ),
@@ -347,6 +350,11 @@ class _MultiSelectBottomSheetState<T> extends State<MultiSelectBottomSheet<T>> {
                     SizedBox(width: 10),
                     Expanded(
                       child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          padding: const EdgeInsets.all(4.0),
+                          textStyle: const TextStyle(fontSize: 16),
+                        ),
                         onPressed: () {
                           widget.onConfirmTap(
                               context, _selectedValues, widget.onConfirm);
@@ -355,11 +363,7 @@ class _MultiSelectBottomSheetState<T> extends State<MultiSelectBottomSheet<T>> {
                             Text(
                               "OK",
                               style: TextStyle(
-                                color: (widget.selectedColor != null &&
-                                        widget.selectedColor !=
-                                            Colors.transparent)
-                                    ? widget.selectedColor!.withOpacity(1)
-                                    : Theme.of(context).primaryColor,
+                                color: Colors.white
                               ),
                             ),
                       ),
