@@ -111,7 +111,7 @@ class MultiSelectBottomSheetField<V> extends FormField<List<V>> {
   final FormFieldSetter<List<V>>? onSaved;
   final GlobalKey<FormFieldState>? key;
   FormFieldState<List<V>>? state;
-
+  double? customMaxWidth;
   MultiSelectBottomSheetField({
     required this.items,
     required this.onConfirm,
@@ -149,6 +149,7 @@ class MultiSelectBottomSheetField<V> extends FormField<List<V>> {
     this.onSaved,
     this.validator,
     this.autovalidateMode = AutovalidateMode.disabled,
+    this.customMaxWidth,
   }) : super(
             key: key,
             onSaved: onSaved,
@@ -231,7 +232,7 @@ class _MultiSelectBottomSheetFieldView<V> extends StatefulWidget {
   final Color? checkColor;
   final bool isDismissible;
   FormFieldState<List<V>>? state;
-
+  double? customMaxWidth;
   _MultiSelectBottomSheetFieldView({
     required this.items,
     this.title,
@@ -265,6 +266,7 @@ class _MultiSelectBottomSheetFieldView<V> extends StatefulWidget {
     required this.separateSelectedItems,
     this.checkColor,
     required this.isDismissible,
+    this.customMaxWidth
   });
 
   /// This constructor allows a FormFieldState to be passed in. Called by MultiSelectBottomSheetField.
@@ -392,6 +394,9 @@ class __MultiSelectBottomSheetFieldViewState<V>
 
   _showBottomSheet(BuildContext ctx) async {
     List<V>? myVar = await showModalBottomSheet<List<V>>(
+      // anchorPoint: Offset(66,44),
+      // constraints: (widget.customMaxWidth==null || false)?null: BoxConstraints(maxWidth: widget.customMaxWidth??300),
+      constraints: BoxConstraints(maxWidth: 300),
         isDismissible: widget.isDismissible,
         backgroundColor: widget.backgroundColor,
         barrierColor: widget.barrierColor,
@@ -443,6 +448,7 @@ class __MultiSelectBottomSheetFieldViewState<V>
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         InkWell(
           onTap: () {
